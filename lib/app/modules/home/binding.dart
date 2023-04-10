@@ -13,7 +13,7 @@ class _HomeState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center(child: Text("Home pages")),
+      body: Center(child: Text("Home page")),
     );
   }
 }
