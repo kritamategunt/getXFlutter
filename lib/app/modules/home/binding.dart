@@ -1,19 +1,17 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:get/get.dart';
+import 'package:to_do_list/app/data/providers/task/provider.dart';
+import 'package:to_do_list/app/data/services/storage/repository.dart';
+import 'package:to_do_list/app/modules/home/controller.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
-
+class HomeBinding implements Bindings {
   @override
-  State<HomePage> createState() => _HomeState();
-}
-
-class _HomeState extends State<HomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: Text("Home page")),
+  void dependencies() {
+    Get.lazyPut(
+      () => HomeController(
+        taskRepository: TaskRepository(
+          taskProvider: TaskProvider(),
+        ),
+      ),
     );
   }
 }
