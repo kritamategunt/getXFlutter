@@ -12,7 +12,7 @@ class TaskCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = Color(task.color);
+    final color = task.color;
     final squareWidth = Get.width - 12.0.wp;
     return Container(
       width: squareWidth / 2,
@@ -40,6 +40,20 @@ class TaskCard extends StatelessWidget {
                 end: Alignment.bottomRight,
                 colors: [color.withOpacity(0.5), color])),
           ),
+          Padding(
+            padding: EdgeInsets.all(6.0.wp),
+            child: Icon(
+              IconData(task.icon, fontFamily: 'MaterialIcons'),
+              color: color,
+            ),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(task.title),
+              Text('${task.todos?.length ?? 0} Task')
+            ],
+          )
         ],
       ),
     );

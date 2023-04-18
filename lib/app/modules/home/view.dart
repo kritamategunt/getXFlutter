@@ -30,7 +30,9 @@ class HomePage extends GetView<HomeController> {
               shrinkWrap: true,
               physics: const ClampingScrollPhysics(),
               children: [
-                TaskCard(task: Task(title: "title", icon: 0xe59c, color: 3)),
+                TaskCard(
+                    task: Task(
+                        title: "title", icon: 0xe59c, color: Colors.black)),
                 AddCard()
               ],
             )

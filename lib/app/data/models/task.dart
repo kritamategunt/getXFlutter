@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class Task extends Equatable {
   final String title;
   final int icon;
-  final int color;
+  final Color color;
   final List<dynamic>? todos;
   const Task(
       {required this.title,
@@ -15,7 +15,7 @@ class Task extends Equatable {
   Task copyWith({
     String? title,
     int? icon,
-    int? color,
+    Color? color,
     List<dynamic>? todos,
   }) =>
       Task(
