@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:to_do_list/app/core/utils/extension.dart';
 import 'package:to_do_list/app/data/models/task.dart';
 import 'package:to_do_list/app/modules/home/controller.dart';
+import 'package:step_progress_indicator/step_progress_indicator.dart';
 
 class TaskCard extends StatelessWidget {
   final homeCtrl = Get.find<HomeController>();
@@ -11,7 +12,7 @@ class TaskCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = Color(0xffffff);
+    final color = Color(task.color);
     final squareWidth = Get.width - 12.0.wp;
     return Container(
       width: squareWidth / 2,
@@ -21,7 +22,26 @@ class TaskCard extends StatelessWidget {
         BoxShadow(
             color: Colors.grey[300]!, blurRadius: 7, offset: const Offset(0, 7))
       ]),
-      child: Column(),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        // TODO change the code when finish CRUD
+        children: [
+          StepProgressIndicator(
+            totalSteps: 100,
+            currentStep: 80,
+            size: 5,
+            padding: 0,
+            unselectedGradientColor: LinearGradient(
+                begin: Alignment.bottomLeft,
+                end: Alignment.bottomRight,
+                colors: [Colors.white, Colors.white]),
+            selectedGradientColor: (LinearGradient(
+                begin: Alignment.bottomLeft,
+                end: Alignment.bottomRight,
+                colors: [color.withOpacity(0.5), color])),
+          ),
+        ],
+      ),
     );
   }
 }
