@@ -31,14 +31,11 @@ class HomePage extends GetView<HomeController> {
                 shrinkWrap: true,
                 physics: const ClampingScrollPhysics(),
                 children: [
-                  // ...controller.tasks
-                  //     .map((element) => TaskCard(
-                  //           task: element,
-                  //         ))
-                  //     .toList(),
-                  TaskCard(
-                      task: Task(
-                          title: "title", icon: 0xe59c, color: '#FF2B60E6')),
+                  ...controller.tasks
+                      .map((element) => TaskCard(
+                            task: element,
+                          ))
+                      .toList(),
                   AddCard()
                 ],
               ),

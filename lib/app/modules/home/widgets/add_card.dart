@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:to_do_list/app/core/utils/extension.dart';
 import 'package:to_do_list/app/core/values/colors.dart';
+import 'package:to_do_list/app/data/models/task.dart';
 import 'package:to_do_list/app/modules/home/controller.dart';
 import 'package:to_do_list/app/widget/icons.dart';
 
@@ -62,6 +64,7 @@ class AddCard extends StatelessWidget {
                                   onSelected: (bool selected) {
                                     homeCtrl.chipIndex.value =
                                         selected ? index : 0;
+                                    print(homeCtrl.chipIndex.value);
                                   },
                                 );
                               }))
@@ -75,10 +78,29 @@ class AddCard extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20)),
                         minimumSize: const Size(150, 40),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        if (homeCtrl.formKey.currentState!.validate()) {
+                          int icon =
+                              icons[homeCtrl.chipIndex.value].icon!.codePoint;
+                          String color =
+                              icons[homeCtrl.chipIndex.value].color!.toHex();
+
+                          var task = Task(
+                              title: homeCtrl.editCtrl.text,
+                              icon: icon,
+                              color: color);
+                          Get.back();
+                          homeCtrl.addTask(task)
+                              ? EasyLoading.showSuccess("create success")
+                              : EasyLoading.showError('Duplicated Task');
+                          print(task.toJson());
+                        }
+                      },
                       child: const Text('Confirm'))
                 ]),
               ));
+          homeCtrl.editCtrl.clear();
+          homeCtrl.changeChipIndex(0);
         },
         child: DottedBorder(
           color: Colors.grey,
